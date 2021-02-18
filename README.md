@@ -1,4 +1,4 @@
-Accounts List Application
+Spring Boot Account Details Service
 
 ## Overview
 
@@ -10,13 +10,9 @@ This application will list a set of accounts and will also provide the list of t
 
 The root path is http://localhost:8080/
 
-
-Following are the operations possible
-
-1. List the Accounts GET '/'
-2. List the transactions for any account GET '/listTransactions/account_number=?'
-
-
+## API Enpoints
+1. `GET /` - Gets all accounts.
+2. `GET /listTransactions/{id}` - Finds all transaction details matching the specified account number.
 
 ## Getting Started
 
@@ -30,21 +26,30 @@ quickly as possible.
 [MAVEN](https://maven.apache.org/) is the build tool for this project, and requires Java JDK to be installed. It is not necessary to install gradle.
 
 
+## Compile & Test
+Basic Prerequisite :
+1. Maven Setup
+2. Open JDK 8 or Oracle Java 8
 
-### Running the application
+Running in local:
+* Once you have the above Prerequisites, compile the project code and run the below command. This would run the entire build for all modules and execute tests with creating artefacts.
 
-This project makes use of the
-[Gradle Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-gradle-plugin.html)
-plugin. To start the application locally just run the following command
+  `mvn clean install`
 
+* You could also run only the application by using below command :
 
-    ./gradew bootRun
+  `mvn spring-boot:run`
+
+## Swagger docs location
+
+*  http://localhost:8080/v2/api-docs
+*  http://localhost:8080/swagger-ui.html
+*  The API documentation makes use of Springfox OpenAPI swagger libraries.
 
 
 ## H2 Console
 
-The H2 DB console can be accessed in your browser. Navigate to [/v1/h2](http://localhost:8080/h2-console) to access the console,
-and ensure the `JDBC URL` matches the one defined in the `application.yml` file: jdbc:h2:file:~/accountdb
+The H2 DB console can be accessed in your browser. Navigate to (http://localhost:8080/h2-console) to access the console,
+and ensure the `JDBC URL` matches the one defined in the `application.properties` file: jdbc:h2:mem:accountdb
 
-**Note**: removing the `simple-ticket-db` file, which will be placed in your home by default, will reset the database.
 

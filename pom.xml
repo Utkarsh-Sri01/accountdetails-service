@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.account.sample</groupId>
-	<artifactId>sample</artifactId>
+	<artifactId>springboot-accountdetails-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>AccountDetailsApplication</name>
 	<description>Demo project for Spring Boot</description>
