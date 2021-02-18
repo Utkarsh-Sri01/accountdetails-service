@@ -15,5 +15,5 @@ public  interface AccountTransactionsRepository extends CrudRepository<AccountTr
      * @param id
      * @return
      */
-    List<AccountTransactions> findByAccountNumber(Long id);
+    List<AccountTransactions> findAllTransactionsByAccountNumber(Long id);
 }

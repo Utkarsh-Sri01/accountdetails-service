@@ -5,5 +5,5 @@ import com.account.sample.datamodel.AccountTransactions;
 import java.util.List;
 
 public interface AccountTransactionService {
-    List<AccountTransactions> findByAccountNumber(long id);
+    List<AccountTransactions> findAllTransactionsByAccountNumber(long id);
 }

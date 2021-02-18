@@ -2,7 +2,6 @@ package com.account.sample.controller;
 
 import com.account.sample.datamodel.AccountTransactions;
 import com.account.sample.exception.AccountTransNotFoundException;
-import com.account.sample.repositories.AccountTransactionsRepository;
 import com.account.sample.service.AccountTransactionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +28,7 @@ public class AccountTransactionsController {
      @GetMapping("/listTransactions/{id}")
      @ApiOperation("Get list of all transactions for provided account number")
      public List<AccountTransactions> listTransactions(@PathVariable(value = "id") Long id) throws Exception {
-        List<AccountTransactions> acctTransactions = accountTransactionService.findByAccountNumber(id);
+        List<AccountTransactions> acctTransactions = accountTransactionService.findAllTransactionsByAccountNumber(id);
 
         if (acctTransactions.size() == 0)
           throw new AccountTransNotFoundException("Transactions not found for account number:" + id);
