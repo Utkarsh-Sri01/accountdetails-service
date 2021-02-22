@@ -24,7 +24,7 @@ public class AccountController {
      */
     @GetMapping("/{userId}")
     @ApiOperation("Get list of all accounts")
-    public List<Account> getAcctDetails(@PathVariable(value = "userId") Long userId) {
+    public List<Account> getAcctDetails(@PathVariable(value = "userId") Long userId) throws Exception {
 
         List<Account> userAccounts= accountService.getAcctDetails(userId);
         if (userAccounts.size() == 0)

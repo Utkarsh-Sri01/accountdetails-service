@@ -26,7 +26,7 @@ public class AccountTransactionsController {
      */
      @GetMapping("/listTransactions/{id}")
      @ApiOperation("Get list of all transactions for provided account number")
-     public List<AccountTransactions> listTransactions(@PathVariable(value = "id") Long accountNumber) {
+     public List<AccountTransactions> listTransactions(@PathVariable(value = "id") Long accountNumber) throws Exception {
         List<AccountTransactions> acctTransactions = accountTransactionService.findAllTransactionsByAccountNumber(accountNumber);
 
         if (acctTransactions.size() == 0)
