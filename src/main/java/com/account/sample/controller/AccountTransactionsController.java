@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
@@ -21,18 +20,17 @@ public class AccountTransactionsController {
 
     /**
      * Retrieves list of transactions for given account number
-     * @param id
+     * @param accountNumber
      * @return list of all account transaction associated to provided account number {@link AccountTransactions}
      * @throws Exception
      */
      @GetMapping("/listTransactions/{id}")
      @ApiOperation("Get list of all transactions for provided account number")
-     public List<AccountTransactions> listTransactions(@PathVariable(value = "id") Long id) throws Exception {
-        List<AccountTransactions> acctTransactions = accountTransactionService.findAllTransactionsByAccountNumber(id);
+     public List<AccountTransactions> listTransactions(@PathVariable(value = "id") Long accountNumber) {
+        List<AccountTransactions> acctTransactions = accountTransactionService.findAllTransactionsByAccountNumber(accountNumber);
 
         if (acctTransactions.size() == 0)
-          throw new AccountTransNotFoundException("Transactions not found for account number:" + id);
-
+          throw new AccountTransNotFoundException("Transactions not found for account number:" + accountNumber);
         return acctTransactions;
     }
 }

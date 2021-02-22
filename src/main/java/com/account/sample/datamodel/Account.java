@@ -10,6 +10,10 @@ import java.sql.Date;
 @Entity
 public class Account {
 
+    @NonNull
+    @Column(name="user_id")
+    public Long userId;
+
     @Id
     @NonNull
     @Column(name="account_number")
@@ -36,6 +40,14 @@ public class Account {
     @Column(name="account_balance")
     public Float accountBalance;
 
+    @NonNull
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(@NonNull Long userId) {
+        this.userId = userId;
+    }
 
     @NonNull
     public Long getAccountNumber() {

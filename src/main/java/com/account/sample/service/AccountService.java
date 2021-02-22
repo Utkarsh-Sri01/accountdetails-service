@@ -5,5 +5,5 @@ import com.account.sample.datamodel.Account;
 import java.util.List;
 
 public interface AccountService {
-    List<Account> findAll();
+    List<Account> getAcctDetails(Long userId);
 }

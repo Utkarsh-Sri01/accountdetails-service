@@ -2,6 +2,7 @@ DROP TABLE ACCOUNT if exists;
 DROP TABLE ACCOUNT_TRANSACTIONS if exists;
 
 CREATE TABLE ACCOUNT (
+  user_id BIGINT not null,
   account_number BIGINT not null,
   account_name varchar(50) not null,
   account_type varchar(20) not null,

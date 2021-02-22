@@ -1,6 +1,6 @@
 package com.account.sample;
 
-import com.account.sample.repositories.AccountRepository;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -29,10 +28,6 @@ class AccountDetailsApplicationTests {
 	@Autowired
 	private MockMvc mockMvc;
 
-	@Test
-	public void contextLoads() {
-	}
-
 	/**
 	 * Test successful response for get all account details
 	 * @throws Exception
@@ -41,17 +36,28 @@ class AccountDetailsApplicationTests {
 	public void getAccountDetailsThenStatus200()
 			throws Exception {
 
-		mockMvc.perform(get("/").contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/12345").contentType(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(2))))
+				.andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(11))))
+				.andExpect(jsonPath("$[0].userId", is(12345)))
 				.andExpect(jsonPath("$[0].accountNumber", is(585309209)))
 				.andExpect(jsonPath("$[0].accountName", is("SGSavings726")))
 				.andExpect(jsonPath("$[0].accountType", is("Savings")))
 				.andExpect(jsonPath("$[0].balanceDate", is("2018-11-08")))
 				.andExpect(jsonPath("$[0].accountCurrency", is("SGD")))
 				.andExpect(jsonPath("$[0].accountBalance", is(84327.51)));
+	}
+
+	@Test
+	public void getAccountDetailsForInvalidUser()
+			throws Exception {
+
+		mockMvc.perform(get("/123456").contentType(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isNotFound())
+				.andExpect(jsonPath("message", is("No Accounts found for user:123456")));
 	}
 
 	/**
@@ -86,7 +92,8 @@ class AccountDetailsApplicationTests {
 
 			mockMvc.perform(get("/listTransactions/{id}",847259722).contentType(MediaType.APPLICATION_JSON))
 					.andDo(print())
-					.andExpect(status().isNotFound());
+					.andExpect(status().isNotFound())
+					.andExpect(jsonPath("message", is("Transactions not found for account number:847259722")));
 		}
 
 }
